@@ -25,5 +25,6 @@ namespace VantageGA.Controllers
             var TransactionInfo = new Transaction();
             return View(TransactionInfo);
         }
+
     }
 }

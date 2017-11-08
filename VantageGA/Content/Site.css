@@ -27,10 +27,3 @@ select,
 textarea {
     max-width: 280px;
 }
-
-footer {
-    clear: both;
-    background-color: #e2e2e2;
-    font-size: .8em;
-    height: 20px;
-}
