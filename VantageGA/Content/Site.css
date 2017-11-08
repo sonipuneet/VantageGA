@@ -1,6 +1,11 @@
-﻿body {
+﻿html {
+    background-color: #e2e2e2;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #e2e2e2;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +26,11 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+footer {
+    clear: both;
+    background-color: #e2e2e2;
+    font-size: .8em;
+    height: 20px;
 }
