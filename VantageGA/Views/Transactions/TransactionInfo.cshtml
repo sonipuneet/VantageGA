@@ -8,13 +8,30 @@
 <h2>@Model.Name</h2>
     -->
 
+
 <html>
 <head>
 </head>
 <body>
     <div class="jumbotron text-center">
+        
+
         <form class="form-inline">
             <div class="dropdown">
+                
+                <p>Transaction Type :
+                @Html.DropDownList("Transaction Type", new  List <SelectListItem>
+{
+                    new SelectListItem { Text = "PrePay", Value = "1"},
+    new SelectListItem { Text = "PostPay", Value = "2"},
+    new SelectListItem { Text = "PayAtThePump", Value = "3"},
+    new SelectListItem { Text = "LoyaltyOutPayIn (LOPI)", Value = "4"}
+}, "Select TransactionType")
+                    <button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown">
+                </p>
+            </div>
+
+       <!--     <div class="dropdown">
                 <p>
                     Transaction Type : <button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown">
                         Select Transaction Type
@@ -27,7 +44,7 @@
                     <li><a href="#">PayAtThePump</a></li>
                     <li><a href="#">LoyaltyOutPayIn (LOPI)</a></li>
                 </ul>
-            </div>
+            </div>-->
             <div class="dropdown">
                 <p>Transaction Mode : <button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown"></p>
                 Select Transaction Mode
