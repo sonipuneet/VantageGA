@@ -1,67 +1,101 @@
 ﻿@model VantageGA.Models.Transaction
-
 <!--@{
     ViewBag.Title = "TransactionInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Name</h2>
-    -->
 
+    -->
 
 <html>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
     <div class="jumbotron text-center">
-        
+        <div class="card" style="width : 400px; height : 280px;">
+            <form class="form-inline" action="/Transactions/TransactionDetails" method="" name="frm_transaction">
+                <!--                            Form for Validation of Transaction Details                                -->
+                <div class="form-group" style=" margin-left: 80px; margin-top: 30px;">
+                    <table style="width:40%;background-color: #eee; border : none; " class="shell-tableMain">
+                        <tr style="height:70%;">
+                            <td>
+                                <div class="dropdown">
 
-        <form class="form-inline">
-            <div class="dropdown">
-                
-                <p>Transaction Type :
-                @Html.DropDownList("Transaction Type", new  List <SelectListItem>
-{
-                    new SelectListItem { Text = "PrePay", Value = "1"},
-    new SelectListItem { Text = "PostPay", Value = "2"},
-    new SelectListItem { Text = "PayAtThePump", Value = "3"},
-    new SelectListItem { Text = "LoyaltyOutPayIn (LOPI)", Value = "4"}
-}, "Select TransactionType")
-                    <button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown">
-                </p>
-            </div>
+                                    <p>
+                                        <label class="shell-text" for="TransactionType">Transaction Type :</label>
+                                        @Html.DropDownList("Transaction Type", new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "PrePay", Value = "0"},
+                    new SelectListItem { Text = "PostPay", Value = "1"},
+                    new SelectListItem { Text = "PayAtThePump", Value = "2"},
+                    new SelectListItem { Text = "LoyaltyOutPayIn(LOPI)", Value = "3"}
+                }, "Select Transaction Type", new { @class = "form-control", id = "transactiontype", onchange = "" })
 
-       <!--     <div class="dropdown">
-                <p>
-                    Transaction Type : <button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Transaction Type
-                        <span class="caret"></span>
-                    </button>
-                </p>
-                <ul class="dropdown-menu">
-                    <li><a href="#">PrePay</a></li>
-                    <li><a href="#">PostPay</a></li>
-                    <li><a href="#">PayAtThePump</a></li>
-                    <li><a href="#">LoyaltyOutPayIn (LOPI)</a></li>
-                </ul>
-            </div>-->
-            <div class="dropdown">
-                <p>Transaction Mode : <button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown"></p>
-                Select Transaction Mode
-                <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                </ul>
-            </div>
-            <button type="submit" class="btn btn-success">OK</button>
-            <button type="submit" class="btn btn-danger">Exit</button>
-        </form>
+                                    </p>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr style="height:70%;">
+                            <td>
+                                <div class="dropdown">
+
+                                    <p>
+                                        <label class="shell-text" for="TransactionType">Transaction Mode :</label>
+                                        @Html.DropDownList("Transaction Mode", new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "PrePay", Value = "0"},
+                    new SelectListItem { Text = "PostPay", Value = "1"},
+                    new SelectListItem { Text = "PayAtThePump", Value = "2"},
+                    new SelectListItem { Text = "LoyaltyOutPayIn (LOPI)", Value = "3"}
+                }, "Select Transaction Mode", new { @class = "form-control", id = "transactionmode", onchange = "" })
+
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align : center;">
+                                <button type="submit" id="validate" class="btn btn-success" onclick="return Validate()">OK</button>
+                                <button type="submit" class="btn btn-danger">Exit</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </form>
+
+        </div>
     </div>
+
+    <script>
+        function Validate() {
+            var transactiontype = document.getElementById("transactiontype");
+            var transactionmode = document.getElementById("transactionmode");
+
+            //var get_trans_type = document.getElementsById("transactiontype");
+            
+
+            if (transactiontype.selectedIndex == 0) {
+                alert("Please select the Transaction Type");
+                return false;
+            }
+            else if (transactiontype.selectedIndex != 0 && transactionmode.selectedIndex == 0) {
+                alert("Please select the Transaction Mode");
+                return false;
+            }
+            else {
+                window.localStorage.trType = transactiontype.options[transactiontype.selectedIndex].text
+                return true;
+                
+            
+            }
+
+        }
+                
+       
+    </script>
 
 </body>
 </html>
-
-

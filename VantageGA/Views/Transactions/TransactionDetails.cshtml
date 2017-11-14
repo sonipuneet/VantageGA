@@ -1,114 +1,247 @@
 ﻿@model VantageGA.Models.Transaction
-
 <!--@{
-    ViewBag.Title = "TransactionDetails";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "TransactionDetails";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
+	-->
 
-<h2>@Model.Name</h2>
-    -->
-
-
-<html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
+	
 </head>
-<body>
-    <div class="jumbotron text-center">
-    <form class="form-inline">
-        <div class="form-group">
-            <label for="TransactionType">Transaction Type:</label>
-            <input type="text" class="form-control" id="TransactionType" placeholder="Transaction Type">
-        </div><hr>
-        <div class="dropdown">
-            <p>Product Type : <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></p>
-            Select Product Type
-            <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-            </ul>
-        </div>
-        <div class="dropdown">
-            <p>POS Type : <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></p>
-            Select POS Type
-            <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-            </ul>
-        </div>
-        <div class="dropdown">
-            <p>Card Type : <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></p>
-            Select Card Type
-            <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-            </ul>
-        </div>
-        <div class="form-group">
-                <p>
-                    Invoice Number:<input type="text" class="form-control" id="Invoice Number" placeholder="Invoice Number">
-                </p>
-            </div><br>
-            <div class="form-group">
-                <p>Transaction Total: <input type="text" class="form-control" id="TransactionTotal" placeholder="Transaction Total"> </p>
-            </div>
-            <div class="dropdown">
-                <p>Loyalty Program : <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></p>
-                Select Loyalty Program
-                <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                </ul>
-            </div>
-            <hr>
-        <div class="form-group">
-            <form action="">
-                <p>
-                    <span class="glyphicon glyphicon-folder-open"></span>
-                    <input type="file id="myFile" name="usr_file" required>
-                    <button type="submit" class="btn btn-default">Import</button>
-                </p>
-            </form>
-        </div>
-            <script>
-                function myFunction() {
-                    var x = document.getElementById("myFile").required;
-                    document.getElementById("").innerHTML = x;
-                }
-            </script>
+	<div class="jumbotron">
+		<div class="card" style="width : 500px;">
+			<div class="text-center " style="height:100%;">
+				<form name ="trans_detail"class="form-inline" type= get action="" >
+					<!--                            Form for Validation of Transaction Details                                -->
+					<div class="form-group" style=" margin-left: 40px; margin-top: 0px;">
+						<table style="width:80%;padding-right:700px;background-color: #eee; border : none; border-color : black; " class="shell-tableMain">
+							<tr style="height:90%;">
+								<td>
+									<label class="shell-text" >Transaction Type :</label>
+									<input type="text" class="form-control" id="TransactionType" onload="loadTrType()" disabled >
+								</td>
+							</tr>
+							<hr>
+							<tr style="height:70%;">
+								<td style="width: 90%;">
+									<div class="dropdown">
+										<label class="shell-text"  style="padding-right : 28px">Product Type :</label>
+										@Html.DropDownList("Product Type", new List<SelectListItem>
+				{
+					new SelectListItem { Text = "Fuel", Value = "0"},
+					new SelectListItem { Text = "Non-Fuel", Value = "1"},
+					new SelectListItem { Text = "Fuel+Non-Fuel", Value = "2"},
+				}, "Select Product Type", new { @class = "form-control", id = "producttype"})
 
-            <hr>
-            <div class="btn-group btn-group-justified">
-                <a href="#" class="btn btn-primary">Previous</a>
-                <a href="#" class="btn btn-success">Validate</a>
-                <a href="#" class="btn btn-danger">Exit</a>
-            </div>
-</form> 
-   </div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 90%;">
+									<div class="dropdown">
+										<label class="shell-text"  style="padding-right : 59px">POS Type :</label>@Html.DropDownList("POS Type", new List<SelectListItem>
+				{
+					new SelectListItem { Text = "Verifone", Value = "0"},
+					new SelectListItem { Text = "Gilbarco", Value = "1"},
+					new SelectListItem { Text = "NCR", Value = "2"},
+				}, "Select POS Type", new { @class = "form-control", id = "postype" })
+										<button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown"/>
+									</div>
+								</td>
+							</tr>
 
-    <!--<div class="container">
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
-                40%
-            </div>
-        </div>
-    </div>
-        -->
 
-</body>
-</html>
+
+							<tr>
+								<td>
+									<div class="dropdown">
+										<label class="shell-text"  style="padding-right : 55px">Card Type :</label>@Html.DropDownList("Card Type", new List<SelectListItem>
+				{
+					new SelectListItem { Text = "Visa", Value = "0"},
+					new SelectListItem { Text = "MasterCard", Value = "1"},
+					new SelectListItem { Text = "AmericanExpress", Value = "2"},
+					new SelectListItem { Text = "Discover", Value = "3"},
+					new SelectListItem { Text = "Debit", Value = "4"},
+					new SelectListItem { Text = "Citi PL", Value = "5"},
+					new SelectListItem { Text = "CitiCB", Value = "6"},
+					new SelectListItem { Text = "All Fleet and other", Value = "7"},
+				}, "Select Card Type", new { @class = "form-control", id = "cardtype" })
+										<button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown"/>
+									</div>
+
+								</td>
+							</tr>
+
+
+
+
+							<tr>
+								<td>
+									<div class="form-group" style="width : 100%" ;>
+										<label class="shell-text"  style="padding-right : 10px">Invoice Number :</label><input type="text" class="form-control" id="invoicenumber" placeholder="Invoice Number" name ="invoice" required>
+									</div>
+								</td>
+							</tr>
+
+
+							<tr>
+								<td>
+									<div class="form-group">
+										<label class="shell-text"  style="padding-right : 2px">Transaction Total :</label><input type="text" class="form-control" id="transactiontotal" placeholder="Transaction Total" name ="tran_total" required>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div class="dropdown" style="width : 110%";>
+										<label class="shell-text"  style="padding-right : 7px">Loyalty Program :</label>@Html.DropDownList("Card Type", new List<SelectListItem>
+				{
+					new SelectListItem { Text = "Visa", Value = "0"},
+					new SelectListItem { Text = "MasterCard", Value = "1"},
+					new SelectListItem { Text = "AmericanExpress", Value = "2"},
+				}, "Select Loyalty Program", new { @class = "form-control", id = "loyaltyprogram" })
+										<button class="btn btn-toolbar dropdown-toggle" type="button" data-toggle="dropdown"/>
+									</div>
+									<hr>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<!--<div class="form-group">
+										<form action="" style="margin :0px 0px 0px 0px;">
+											<div class="input-group">
+												<label class="input-group-btn">
+													<span class="btn btn-default">
+														Browse&hellip; <input type="file" style="display: none;" multiple>
+													</span>
+												</label>
+												<input type="text" class="form-control" readonly>
+											</div>
+										</form>
+									</div>
+										-->
+
+
+									<div class="form-group" style="margin :-40px 0px 0px 0px;">
+										<form action="">
+												<div class="input-group">
+													<label class="input-group-btn">
+														<span class="btn btn-default">
+															Import&hellip; <input type="file" style="display: none;" multiple>
+														</span>
+													</label>
+													<input type="text" class="form-control" readonly>
+												</div>
+
+										</form>
+									</div>
+
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="btn" style=" margin-left: 70px;">
+										<a href="@Url.Action("TransactionInfo", "Transactions")" class="btn btn-primary">Previous</a>
+										<button type="submit" class="btn btn-success" onclick="Validate_Dropdown()">Validate</button>
+										<a href="@Url.Action("TransactionInfo", "Transactions")" class="btn btn-danger">Exit</a>
+									</div>
+								</td>
+							</tr>
+							<!--<div class="container">
+
+							<div class="progress">
+								<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
+									40%
+								</div>
+							</div>
+						</div>
+						-->
+						</table>
+					</div>
+				</form>
+			</div>
+		</div>
+</div>
+	<script>
+
+		$(function () {
+
+			// We can attach the `fileselect` event to all file inputs on the page
+			$(document).on('change', ':file', function () {
+				var input = $(this),
+					numFiles = input.get(0).files ? input.get(0).files.length : 1,
+					label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+				input.trigger('fileselect', [numFiles, label]);
+			});
+
+			// We can watch for our custom `fileselect` event like this
+			$(document).ready(function () {
+				$(':file').on('fileselect', function (event, numFiles, label) {
+
+					var input = $(this).parents('.input-group').find(':text'),
+						log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+					if (input.length) {
+						input.val(log);
+					} else {
+						if (log) alert(log);
+					}
+
+				});
+			});
+
+		});
+		</script>
+			<script>
+	
+				function Validate_Dropdown() {
+					var producttype = document.getElementById("producttype");
+					var postype = document.getElementById("postype");
+					var cardtype = document.getElementById("cardtype");
+					var loyaltyprogram = document.getElementById("loyaltyprogram");
+					//var invoicenumber = document.forms["trans_detail"]["invoice"].value;
+					//var transactiontotal = document.forms["trans_detail"]["trans_total"].value;
+
+
+					if (producttype.selectedIndex == 0) {
+						alert("Please select the Product Type");
+						return false;
+					}
+					else if (postype.selectedIndex == 0 && producttype.selectedIndex != 0) {
+						alert("Please select the POS Type");
+						return false;
+					}
+					else if (cardtype.selectedIndex == 0 && (postype.selectedIndex != 0 || producttype.selectedIndex != 0)) {
+						alert("Please select the Card Type");
+						return false;
+					}
+					else if (loyaltyprogram.selectedIndex == 0 && (cardtype.selectedIndex != 0 || postype.selectedIndex != 0 || producttype.selectedIndex != 0)) {
+							alert("Please select the Loyalty Program");
+							return false;
+						}
+						else {
+							return true;
+						}
+					}
+				
+				//Validate_Dropdown();
+				</script>
+					<script>
+		function loadTrType() {
+			console.log(window.localStorage.trType);
+			document.getElementById('TransactionType').value = window.localStorage.trType;
+		}
+		loadTrType();
+
+	</script>
+
+
+
+
 
